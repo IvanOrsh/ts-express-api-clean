@@ -1,0 +1,10 @@
+### signup route
+POST http://localhost:5050/api/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Abdullah",
+  "email": "abdullah@email.com",
+  "password": "123",
+  "passwordConfirmation": "123"
+}
