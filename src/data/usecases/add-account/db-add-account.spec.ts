@@ -3,7 +3,7 @@ import {
   type AddAccountModel,
   type Encrypter,
   type AddAccountRepository
-} from './db-add-account.protocols'
+} from './db-add-account-protocols'
 import { DbAddAccount } from './db-add-account'
 
 const makeEncrypter = (): Encrypter => {
