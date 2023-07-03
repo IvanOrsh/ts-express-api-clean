@@ -16,7 +16,9 @@ export const MongoHelper = {
 
   async getCollection (name: string): Promise<Collection> {
     // The correct way of dealing with an ambiguous connection is to just call MongoClient.connect() again
-    await this.connect(this.url)
+    if (!this.client) {
+      await this.connect(this.url)
+    }
     return (this.client as MongoClient).db().collection(name)
   }
 }
