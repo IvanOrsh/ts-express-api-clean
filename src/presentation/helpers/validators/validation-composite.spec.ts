@@ -21,9 +21,7 @@ const makeSut = (): SutTypes => {
     makeValidation(),
     makeValidation()
   ]
-  const sut = new ValidationComposite([
-    ...validationStubs
-  ])
+  const sut = new ValidationComposite(validationStubs)
   return {
     sut,
     validationStubs
@@ -48,5 +46,13 @@ describe('Validation Composite', () => {
       field: 'any_value'
     })
     expect(error).toEqual(new Error())
+  })
+
+  test('Should return null if validation succeeds', () => {
+    const { sut } = makeSut()
+    const error = sut.validate({
+      field: 'any_value'
+    })
+    expect(error).toBeFalsy()
   })
 })
