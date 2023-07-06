@@ -15,6 +15,7 @@ export class DbAuthentication implements Authentication {
     if (!account) {
       return null
     }
+
     const isValid = await this.hashCompare.compare(authentication.password, account.password)
     if (!isValid) {
       return null
