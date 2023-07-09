@@ -8,3 +8,16 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+  api:
+    container_name: api-container
+    build: .
+    restart: always
+    image: ts-express-api-clean
+    command: npm start
+    volumes:
+      - ./dist:/usr/src/ts-express-api-clean/dist
+    ports:
+      - "5050:5050"
+    links:
+      - mongo
+    
