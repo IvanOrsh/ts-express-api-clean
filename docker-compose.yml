@@ -13,13 +13,15 @@ services:
     build: .
     restart: always
     image: ts-express-api-clean
-    command: npm start
+    command: npm run debug
     environment:
       - MONGO_URL=mongodb://mongo:27017/clean-node-api
     volumes:
       - ./dist:/usr/src/ts-express-api-clean/dist
+      - ./package.json:/usr/src/ts-express-api-clean/package.json
     ports:
       - "5050:5050"
+      - "9222:9222"
     links:
       - mongo
     
