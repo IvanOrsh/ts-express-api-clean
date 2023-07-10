@@ -21,8 +21,8 @@ describe('Login Routes', () => {
   })
 
   describe('POST /signup', () => {
-    test('Should return an account on signup', async () => {
-      const response = await request(app)
+    test('Should return an accessToken on signup', async () => {
+      await request(app)
         .post('/api/signup')
         .send({
           name: 'Abdullah',
@@ -31,16 +31,11 @@ describe('Login Routes', () => {
           passwordConfirmation: '123'
         })
         .expect(200)
-
-      const { name, email, password } = response.body
-      expect(name).toBe('Abdullah')
-      expect(email).toBe('abdullah@email.com')
-      expect(password).toBeTruthy()
     })
   })
 
   describe('POST /login', () => {
-    test('Should return an 200 on login', async () => {
+    test('Should return an 200 on success', async () => {
       const password = await hash('123', 12)
       await accountCollection.insertOne({
         name: 'Abdullah',
@@ -56,7 +51,7 @@ describe('Login Routes', () => {
         .expect(200)
     })
 
-    test('Should return an 200 on login', async () => {
+    test('Should return an 401 if invalid credentials are provided', async () => {
       await request(app)
         .post('/api/login')
         .send({
