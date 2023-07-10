@@ -14,6 +14,8 @@ services:
     restart: always
     image: ts-express-api-clean
     command: npm start
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/clean-node-api
     volumes:
       - ./dist:/usr/src/ts-express-api-clean/dist
     ports:
