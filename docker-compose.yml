@@ -10,14 +10,14 @@ services:
       - "27017:27017"
   api:
     container_name: api-container
-    build: .
+    image: node:16
+    working_dir: /usr/src/ts-express-api-clean
     restart: always
-    image: ts-express-api-clean
-    command: npm run debug
+    command: bash -c "npm pkg delete scripts.prepare && npm install --omit=dev && npm run debug"
     environment:
       - MONGO_URL=mongodb://mongo:27017/clean-node-api
     volumes:
-      - ./dist:/usr/src/ts-express-api-clean/dist
+      - ./dist/:/usr/src/ts-express-api-clean/dist/
       - ./package.json:/usr/src/ts-express-api-clean/package.json
     ports:
       - "5050:5050"
