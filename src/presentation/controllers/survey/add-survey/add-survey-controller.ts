@@ -1,4 +1,8 @@
-import { badRequest, serverError } from '../../../helpers/http/http-helper'
+import {
+  badRequest,
+  serverError,
+  noContent
+} from '../../../helpers/http/http-helper'
 import {
   type HttpRequest,
   type HttpResponse,
@@ -27,12 +31,7 @@ export class AddSurveyController implements Controller {
         answers
       })
 
-      return new Promise(resolve => {
-        resolve({
-          statusCode: 200,
-          body: {}
-        })
-      })
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
