@@ -19,3 +19,17 @@ Content-Type: application/json
   "password": "123"
 }
 
+### surveys route
+### add survey
+POST http://localhost:5050/api/surveys HTTP/1.1
+Content-Type: application/json
+
+{
+  "question": "Do you like dogs?",
+  "answers": [
+    {
+      "image": "image-none",
+      "answer": "Yes"
+    }
+  ]
+}
