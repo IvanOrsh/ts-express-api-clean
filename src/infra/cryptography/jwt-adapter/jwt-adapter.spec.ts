@@ -7,6 +7,11 @@ jest.mock('./jwt-promisified', () => ({
     return new Promise(resolve => {
       resolve('accessToken')
     })
+  },
+  async jwtVerifyPromisified (): Promise<string> {
+    return new Promise(resolve => {
+      resolve('decodedValue')
+    })
   }
 }))
 
@@ -16,7 +21,7 @@ const makeSut = (): JwtAdapter => {
 
 describe('Jwt Adapter', () => {
   describe('sign()', () => {
-    test('Should call sign with correct', async () => {
+    test('Should call sign with correct values', async () => {
       const sut = makeSut()
       const signSpy = jest.spyOn(jwtPromisified, 'jwtSignPromisified')
       await sut.encrypt('any_id')
@@ -39,6 +44,15 @@ describe('Jwt Adapter', () => {
       }))
       const promise = sut.encrypt('any_id')
       await expect(promise).rejects.toThrow()
+    })
+  })
+
+  describe('verify()', () => {
+    test('Should call verify with correct', async () => {
+      const sut = makeSut()
+      const verifySpy = jest.spyOn(jwtPromisified, 'jwtVerifyPromisified')
+      await sut.decrypt('any_token')
+      expect(verifySpy).toHaveBeenCalledWith('any_token', 'secret')
     })
   })
 })
