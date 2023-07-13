@@ -1,3 +1,4 @@
+import { type JwtPayload, type Jwt } from 'jsonwebtoken'
 import { jwtSignPromisified, jwtVerifyPromisified } from './jwt-promisified'
 import { type Encrypter } from '../../../data/protocols/cryptography/encrypter'
 import { type Decrypter } from '../../../data/protocols/cryptography/decrypter'
@@ -13,7 +14,7 @@ export class JwtAdapter implements
     return accessToken
   }
 
-  async decrypt (token: string): Promise<string | null> {
+  async decrypt (token: string): Promise<string | JwtPayload | Jwt | null> {
     const decoded = await jwtVerifyPromisified(token, this.secret)
 
     return decoded
