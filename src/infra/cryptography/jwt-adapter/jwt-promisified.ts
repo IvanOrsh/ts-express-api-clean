@@ -18,13 +18,13 @@ export const jwtSignPromisified = async (
 export const jwtVerifyPromisified = async (
   token: string,
   secretOrPublicKey: Secret | GetPublicKeyOrSecret
-): Promise<string> => {
+): Promise<string | jwt.JwtPayload> => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, secretOrPublicKey, (err, decoded) => {
       if (err) {
         reject(err)
       } else {
-        resolve(decoded as string)
+        resolve(decoded as string | jwt.JwtPayload)
       }
     })
   })

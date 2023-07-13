@@ -13,9 +13,9 @@ export class JwtAdapter implements
     return accessToken
   }
 
-  async decrypt (value: string): Promise<string | null> {
-    await jwtVerifyPromisified(value, this.secret)
+  async decrypt (token: string): Promise<string | null> {
+    const decoded = await jwtVerifyPromisified(token, this.secret)
 
-    return null
+    return decoded
   }
 }
